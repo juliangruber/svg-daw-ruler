@@ -3,6 +3,7 @@
 const html = require('bel')
 const Component = require('nanocomponent')
 const inherits = require('util').inherits
+const morph = require('nanomorph')
 
 module.exports = Ruler
 inherits(Ruler, Component)
@@ -19,7 +20,7 @@ Ruler.prototype._render = function (opts) {
   const width = this.width = opts.width
   const height = this.height = opts.height
   const cellWidth = this.cellWidth = opts.cellWidth
-  return html`
+  const updated = html`
     <g>
       <rect width=${width} height=${height - 2} fill="hsl(0, 0%, 30%)" />
       <g>
@@ -36,10 +37,14 @@ Ruler.prototype._render = function (opts) {
       <line x1=0 y1=${height - 2} x2=${width} y2=${height - 2} stroke="black" />
       <line x1=0 y1=${height - 1} x2=${width} y2=${height - 1} stroke="hsla(0, 0%, 0%, 0.5)" />
     </g>`
+  if (this._element) morph(this._element, updated)
+  else this._element = updated
+  return this._element
 }
 
 Ruler.prototype._update = function (opts) {
   return opts.width !== this.width
-    && opts.height !== this.height
-    && opts.cellWidth !== this.cellWidth
+    || opts.height !== this.height
+    || opts.cellWidth !== this.cellWidth
 }
+
