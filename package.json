@@ -1,6 +1,6 @@
 {
   "name": "svg-daw-ruler",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "description": "A ruler element commonly used in DAWs",
   "scripts": {
