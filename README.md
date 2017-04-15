@@ -15,7 +15,7 @@ const ruler = Ruler()
 
 const el = html`
   <svg width=600 height=40>
-    ${ruler.render({ width: 600, height: 30, cellWidth: 20 })}
+    ${ruler.render({ width: 600, height: 30, cellWidth: 20, y: 50 })}
   </svg>
 `
 

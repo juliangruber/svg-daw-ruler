@@ -13,15 +13,19 @@ function Ruler() {
   Component.call(this)
   this.width = null
   this.height = null
+  this.x = null
+  this.y = null
   this.cellWidth = null
 }
 
 Ruler.prototype._render = function (opts) {
   const width = this.width = opts.width
   const height = this.height = opts.height
+  const x = this.x = opts.x || 0
+  const y = this.y = opts.y || 0
   const cellWidth = this.cellWidth = opts.cellWidth
   const updated = html`
-    <g>
+    <g transform="translate(${x}, ${y})">
       <rect width=${width} height=${height - 2} fill="hsl(0, 0%, 30%)" />
       <g>
         ${Array(Math.ceil(width / cellWidth)).fill(0).map((_, i) => html`
@@ -45,6 +49,8 @@ Ruler.prototype._render = function (opts) {
 Ruler.prototype._update = function (opts) {
   return opts.width !== this.width
     || opts.height !== this.height
+    || opts.x !== this.x
+    || opts.y !== this.y
     || opts.cellWidth !== this.cellWidth
 }
 
