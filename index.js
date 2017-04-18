@@ -31,10 +31,14 @@ Ruler.prototype._render = function (opts) {
         ${Array(Math.ceil(width / cellWidth)).fill(0).map((_, i) => html`
           <line
             x1=${i * cellWidth}
-            y1=${height / 1.3}
+            y1=${i % 4 === 0
+              ? height / 1.4
+              : height / 1.3}
             x2=${i * cellWidth}
             y2=${height - 2}
-            stroke="hsl(0, 0%, 60%)"
+            stroke=${i % 4 === 0
+              ? 'hsl(0, 0%, 60%)'
+              : 'hsl(0, 0%, 50%)'}
           />
         `)}
       </g>
